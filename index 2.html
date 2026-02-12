@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cozy Art Prompt Generator</title>
+<style>
+body {
+    font-family: 'Pixel Operator', monospace;
+    background: linear-gradient(to bottom right, #cce7ff, #ffd6e8, #ffffff);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.generator-container {
+    display: flex;
+    gap: 40px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px 50px;
+    border-radius: 20px;
+    box-shadow: 0px 6px 20px rgba(0,0,0,0.15);
+    z-index: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.module {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 25px;
+    border-radius: 15px;
+    min-width: 180px;
+    flex: 1 1 200px;
+}
+
+.module h3 {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #555;
+}
+
+.module p {
+    min-height: 50px;
+    text-align: center;
+    font-size: 16px;
+    margin: 10px 0 15px 0;
+    color: #333;
+}
+
+.module button {
+    background-color: #ffd6e8;
+    border: 2px solid #cce7ff;
+    border-radius: 8px;
+    padding: 8px 15px;
+    font-family: 'Pixel Operator', monospace;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.module button:hover {
+    background-color: #cce7ff;
+}
+
+.color-box {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: white;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+<div class="generator-container">
+    <div class="module">
+        <h3>Subject</h3>
+        <p id="subject">...</p>
+        <button onclick="generateSubject()">Spin</button>
+    </div>
+    <div class="module">
+        <h3>Style</h3>
+        <p id="style">...</p>
+        <button onclick="generateStyle()">Spin</button>
+    </div>
+    <div class="module">
+        <h3>Mood</h3>
+        <p id="mood">...</p>
+        <button onclick="generateMood()">Spin</button>
+    </div>
+    <div class="module">
+        <h3>Colour Palette</h3>
+        <div id="palette" style="display:flex; flex-wrap:wrap; justify-content:center;"></div>
+        <button onclick="generatePalette()">Generate</button>
+    </div>
+</div>
+
+<script>
+// --- Subjects (Model-focused) ---
+const subjects = [
+"Dancing woman","Boy listening to music on a crowded train","Goddess","Lovers",
+"Blythe doll","Girl posing for a camera","Ethereal angel","Bleeding knight",
+"Cute monster","Tiny robot","Time traveler","Ghost child","Forest guardian spirit",
+"Mermaid","Shape-shifting creature","Anthropomorphic animal","Celestial being",
+"Fairy","Witch","Wizard","Samurai","Knight","Pirate","Cyberpunk hacker",
+"Robot companion","Miniature giant","Shadow creature","Magical animal",
+"Goddess meditating","Elderly sage","Child with balloon","Floating spirit","Vampire"
+];
+
+// --- Styles ---
+const styles = [
+"Watercolor","Oil painting","Digital art","Ink sketch","Pixel art","Pastel drawing",
+"Collage","Anime style","Cartoonish","Soft shading","Madhubani","Realism"
+];
+
+// --- Moods ---
+const moods = [
+"Dreamy","Dark and eerie","Whimsical","Melancholic","Cozy","Mysterious",
+"Cheerful","Calm","Playful","Nostalgic","Liminal"
+];
+
+// --- Functions ---
+function randomItem(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+function generateSubject() { document.getElementById("subject").innerText = randomItem(subjects); }
+function generateStyle() { document.getElementById("style").innerText = randomItem(styles); }
+function generateMood() { document.getElementById("mood").innerText = randomItem(moods); }
+
+function generatePalette() {
+    const paletteDiv = document.getElementById("palette");
+    paletteDiv.innerHTML = "";
+    for (let i = 0; i < 5; i++) {
+        const color = "#" + Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');
+        const colorBox = document.createElement("div");
+        colorBox.className = "color-box";
+        colorBox.style.backgroundColor = color;
+        colorBox.innerText = color;
+        paletteDiv.appendChild(colorBox);
+    }
+}
+</script>
+</body>
+</html>
