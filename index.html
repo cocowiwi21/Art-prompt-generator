@@ -1,176 +1,182 @@
 <!DOCTYPE html>
-<html>
-<head> 
-    <meta charset=UTF-8>
-    <title>Ultimate Art Prompt Generator</title>
-
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cozy Art Prompt Generator</title>
     <style>
+        /* General page styling */
         body {
+            font-family: 'Pixel Operator', monospace;
+            background: linear-gradient(to bottom right, #cce7ff, #ffd6e8, #ffffff);
             margin: 0;
-            height: 100vh;
+            padding: 20px;
             display: flex;
             justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Container for the generators */
+        .generator-container {
+            display: flex;
+            gap: 30px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Each module (Subject, Style, Mood, Palette) */
+        .module {
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            background: radial-gradient(circle at top, #2b2d5a, #0f1023 70%);
-            font-family: 'Poppins', sans-serif;
-            color: white;
-            overflow: hidden;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 150px;
         }
 
-        .container {
-            background: rgba(255, 255, 255, 0.08);
-            padding: 50px 40px;
-            border-radius: 25px;
-            backdrop-filter: blur(15px);
-            width: 90%;
-            max-width: 520px;
+        .module h3 {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .module p {
+            min-height: 40px;
             text-align: center;
-            box-shadow: 0 0 40px rgba(120, 115, 245, 0.4);
-            animation: float 4s ease-in-out infinite;
+            font-size: 14px;
+            margin: 5px 0 10px 0;
+            color: #333;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-12px); }
-            100% { transform: translateY(0px); }
-        }
-
-        h1 {
-            font-size: 28px;
-            margin-bottom: 30px;
-            letter-spacing: 1px;
-            background: linear-gradient(45deg, #ff6ec4, #7873f5);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        button {
-            padding: 14px 30px;
-            font-size: 18px;
-            border: none;
-            border-radius: 30px;
-            background: linear-gradient(45deg, #ff6ec4, #7873f5);
-            color: white;
+        .module button {
+            background-color: #ffd6e8;
+            border: 2px solid #cce7ff;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-family: 'Pixel Operator', monospace;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(120,115,245,0.5);
+            transition: 0.2s;
         }
 
-        button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(255,110,196,0.6);
+        .module button:hover {
+            background-color: #cce7ff;
         }
 
-        #result {
-            margin-top: 35px;
-            font-size: 20px;
-            line-height: 1.6;
-            min-height: 60px;
-            opacity: 0;
-            transition: opacity 0.5s ease;
+        /* Palette squares */
+        .color-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            margin: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: white;
+            font-weight: bold;
         }
 
-        .show {
-            opacity: 1 !important;
-        }
-
-        .sparkle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.6;
-            animation: twinkle 4s infinite alternate;
-        }
-
-        @keyframes twinkle {
-            from { opacity: 0.2; transform: scale(1); }
-            to { opacity: 1; transform: scale(1.8); }
+        /* Cat image corner */
+        .cat {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 80px;
+            height: auto;
+            pointer-events: none;
         }
     </style>
 </head>
-
 <body>
-    <div>
-  <h3>Subject</h3>
-  <p id="subject"></p>
-  <button onclick="generateSubject()">Spin</button>
-</div>
+    <div class="generator-container">
 
-<div>
-  <h3>Style</h3>
-  <p id="style"></p>
-  <button onclick="generateStyle()">Spin</button>
-</div>
+        <!-- Subject Module -->
+        <div class="module">
+            <h3>Subject</h3>
+            <p id="subject">...</p>
+            <button onclick="generateSubject()">Spin</button>
+        </div>
 
-<div>
-  <h3>Mood</h3>
-  <p id="mood"></p>
-  <button onclick="generateMood()">Spin</button>
-</div>
+        <!-- Style Module -->
+        <div class="module">
+            <h3>Style</h3>
+            <p id="style">...</p>
+            <button onclick="generateStyle()">Spin</button>
+        </div>
 
-    <div class="container">
-        <h1>✨ Ultimate Art Prompt Generator ✨</h1>
-        <button onclick="generatePrompt()">Generate Magic</button>
-        <div id="result"></div>
+        <!-- Mood Module -->
+        <div class="module">
+            <h3>Mood</h3>
+            <p id="mood">...</p>
+            <button onclick="generateMood()">Spin</button>
+        </div>
+
+        <!-- Color Palette Module -->
+        <div class="module">
+            <h3>Colour Palette</h3>
+            <div id="palette" style="display:flex; flex-wrap:wrap; justify-content:center;"></div>
+            <button onclick="generatePalette()">Generate</button>
+        </div>
+
     </div>
 
+    <!-- Cat Image -->
+    <img src="https://i.imgur.com/5q2zXfT.png" alt="Cute cat" class="cat">
+
     <script>
-        const themes = [
-            "Fantasy", "Sci-fi", "Cyberpunk", "Steampunk", "Mythology",
-            "Horror", "Gothic", "Nature", "Post-apocalyptic", "Medieval",
-            "Underwater", "Space", "Dreamscape", "Surreal", "Urban",
-            "Cottagecore", "Desert world", "Ice kingdom", "Celestial", "Time travel"
-        ];
-
+        // --- Subjects ---
         const subjects = [
-            "girl", "warrior", "witch", "astronaut", "scientist",
-            "dancer", "angel", "demon", "explorer", "dragon",
-            "wolf", "cat", "whale", "unicorn", "giant insect",
-            "mirror", "lantern", "ancient book", "enchanted sword",
-            "mysterious mask", "crown", "key", "potion", "portal door",
-            "lost city", "forest temple", "crystal castle", "floating island"
+            "Lonely astronaut", "Floating city", "Ancient tree spirit", 
+            "Cyberpunk cat", "Magical library", "Cozy cottage", 
+            "Mysterious forest", "Tiny robot", "Dreamy landscape", 
+            "Cute monster", "Pastel sky", "Floating island"
         ];
 
-        function generatePrompt() {
-            const randomTheme = themes[Math.floor(Math.random() * themes.length)];
-            const randomSubject = subjects[Math.floor(Math.random() * subjects.length)];
+        // --- Styles ---
+        const styles = [
+            "Watercolor", "Oil painting", "Digital art", "Ink sketch", 
+            "Pixel art", "Pastel drawing", "Collage", "Anime style", 
+            "Cartoonish", "Soft shading"
+        ];
 
-            const resultDiv = document.getElementById("result");
-            resultDiv.innerText = "Draw a " + randomSubject + " in a " + randomTheme + " style.";
-            resultDiv.classList.add("show");
+        // --- Moods ---
+        const moods = [
+            "Dreamy", "Dark and eerie", "Whimsical", "Melancholic", 
+            "Cozy", "Mysterious", "Cheerful", "Calm", "Playful", "Nostalgic"
+        ];
+
+        // --- Functions ---
+        function randomItem(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
         }
 
-        // sparkle generator
-        for (let i = 0; i < 40; i++) {
-            const sparkle = document.createElement("div");
-            sparkle.className = "sparkle";
-            sparkle.style.top = Math.random() * 100 + "vh";
-            sparkle.style.left = Math.random() * 100 + "vw";
-            sparkle.style.animationDuration = (2 + Math.random() * 4) + "s";
-            document.body.appendChild(sparkle);
+        function generateSubject() {
+            document.getElementById("subject").innerText = randomItem(subjects);
         }
-        const subjects = ["Lonely astronaut", "Floating city", "Ancient tree spirit", "Cyberpunk cat"];
-const styles = ["Watercolor", "Oil painting", "Digital art", "Ink sketch"];
-const moods = ["Dreamy", "Dark and eerie", "Whimsical", "Melancholic"];
 
-function randomItem(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
-}
+        function generateStyle() {
+            document.getElementById("style").innerText = randomItem(styles);
+        }
 
-function generateSubject() {
-    document.getElementById("subject").innerText = randomItem(subjects);
-}
+        function generateMood() {
+            document.getElementById("mood").innerText = randomItem(moods);
+        }
 
-function generateStyle() {
-    document.getElementById("style").innerText = randomItem(styles);
-}
-
-function generateMood() {
-    document.getElementById("mood").innerText = randomItem(moods);
-}
+        function generatePalette() {
+            const paletteDiv = document.getElementById("palette");
+            paletteDiv.innerHTML = "";
+            for (let i = 0; i < 5; i++) {
+                const color = "#" + Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');
+                const colorBox = document.createElement("div");
+                colorBox.className = "color-box";
+                colorBox.style.backgroundColor = color;
+                colorBox.innerText = color;
+                paletteDiv.appendChild(colorBox);
+            }
+        }
     </script>
-
 </body>
 </html>
