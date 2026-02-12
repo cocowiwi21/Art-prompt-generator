@@ -92,6 +92,23 @@
 </head>
 
 <body>
+    <div>
+  <h3>Subject</h3>
+  <p id="subject"></p>
+  <button onclick="generateSubject()">Spin</button>
+</div>
+
+<div>
+  <h3>Style</h3>
+  <p id="style"></p>
+  <button onclick="generateStyle()">Spin</button>
+</div>
+
+<div>
+  <h3>Mood</h3>
+  <p id="mood"></p>
+  <button onclick="generateMood()">Spin</button>
+</div>
 
     <div class="container">
         <h1>✨ Ultimate Art Prompt Generator ✨</h1>
@@ -134,6 +151,25 @@
             sparkle.style.animationDuration = (2 + Math.random() * 4) + "s";
             document.body.appendChild(sparkle);
         }
+        const subjects = ["Lonely astronaut", "Floating city", "Ancient tree spirit", "Cyberpunk cat"];
+const styles = ["Watercolor", "Oil painting", "Digital art", "Ink sketch"];
+const moods = ["Dreamy", "Dark and eerie", "Whimsical", "Melancholic"];
+
+function randomItem(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function generateSubject() {
+    document.getElementById("subject").innerText = randomItem(subjects);
+}
+
+function generateStyle() {
+    document.getElementById("style").innerText = randomItem(styles);
+}
+
+function generateMood() {
+    document.getElementById("mood").innerText = randomItem(moods);
+}
     </script>
 
 </body>
